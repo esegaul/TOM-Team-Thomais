@@ -9,7 +9,7 @@ HTML_TEMPLATE = "template.html"
 PARAMETERS_IN_INFO = ["problem_type", "description", "example", "additional_resources", "image_url"]
 
 if os.path.exists(DB_FILE) == False:
-	os.system("echo [] >  {}".format(DB_FILE))
+	os.system("echo {} >  " + DB_FILE)
 
 def create_db_backup():
 	os.system("cp {} {}".format(DB_FILE, DB_FILE.partition(".")[0]+"_backup.json"))
@@ -27,7 +27,7 @@ def get_problem_type_info(problemType):
 
 @app.route('/', methods=['GET'])
 def index():
-	return render_template("index.html")
+	return render_template("index.html", params=PARAMETERS_IN_INFO)
 
 
 @app.route('/addProblem', methods=['POST'])
