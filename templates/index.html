@@ -10,9 +10,11 @@ function sendData(params){
 	var problem = document.getElementById("problem_type").value;
 	var paragraph = document.getElementById("values");
 	paragraph.innerHTML += problem + "<br>";
-	var params = "problem_type=" + problem;
-	document.getElementById("problem_type").value = "";
-	if (params.length > 0){
+	{% for param in params %}
+	 	params += "&{{param}}=" + document.getElementById("{{param}}").value;
+	 	document.getElementById("{{param}}").value = "";
+	{% endfor %}
+	if (problem.length > 0){
 		http.open('POST', url, true);
 
 		//Send the proper header information along with the request
@@ -37,16 +39,23 @@ function httpGet(theUrl)
     return xmlHttp.responseText;
 }
 
+function addLinks(listOfVals){
+	var paragraph = document.getElementById("values");
+	paragraph.innerHTML = "";
+	for (var i = 0; i < obVal.length; i++) {
+		var problemType = obVal[i];
+    	paragraph.innerHTML += '<a href="guide/' + problemType + '">'+ problemType + '</a>' + "<br>";
+	}
+}
+
 function update(){
 	jsonString = httpGet("getGuideNames");
 	// This is the actual file structure
 	obVal = JSON.parse(jsonString);
-	var paragraph = document.getElementById("values");
-	paragraph.innerHTML = "";
 	// Converting string to json so we can interact with it
-	for (var i = 0; i < obVal.length; i++) {
-    	paragraph.innerHTML += obVal[i] + "<br>";
-	}
+	addLinks(obVal);
+
+
 }
 
 </script>
@@ -55,9 +64,9 @@ function update(){
 <h1>Team Thomais</h1>
 
 <form onsubmit="return sendData();">
-  Problem:<br>
-  <input type="text" id="problem_type"><br>
-
+{% for param in params %}
+  {{param}}: <input type="text" id="{{param}}"><br>
+{% endfor %}
   <input type="submit" value="Submit">
 </form>
 
