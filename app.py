@@ -7,6 +7,8 @@ app = Flask(__name__, static_url_path='/static')
 DB_FILE = "database.json"
 HTML_TEMPLATE = "template.html"
 PARAMETERS_IN_INFO = ["problem_type", "description", "example", "additional_resources", "image_url"]
+LIST_OBJECTS = ["additional_resources", "image_url", "example"]
+# This is not really a good way of doing this, but I'll try to change this up later
 
 if os.path.exists(DB_FILE) == False:
 	os.system("echo {} >  " + DB_FILE)
@@ -40,7 +42,10 @@ def add_problem():
 	if problem_type != None:
 		# This means the problem type was specified
 		for val in PARAMETERS_IN_INFO:
-			temp_dict[val] = request.form.get(val, None)
+			if val in LIST_OBJECTS:
+				temp_dict[val] = request.form.getlist(val)
+			else:
+				temp_dict[val] = request.form.get(val, None)
 		add_problem_to_file(problem_type, temp_dict)
 		# Adds the inputted problem to a file
 	return ('', 204)
