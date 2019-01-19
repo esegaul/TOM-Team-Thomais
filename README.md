@@ -49,9 +49,20 @@ An instance of the game solely distributed to Thomais
 
 The database is a json file in the structure of:
 
-```javascript
-{
-	"lessons": {"fractions": {"example": list<string>, "description": <string>, "additional_resources": list<string>, "image_url": string}, {"subtraction": {"example": list<string>, "description": <string>, "additional_resources": list<string>, "image_url": string}
-	""
-}
+
+```json
+"lessons":{
+   "fractions":{
+      "example":list<string>,
+      "description":<string>,
+      "additional_resources":list<string>,
+      "image_url":string
+   },
+   {
+      "subtraction":{
+         "example":list<string>,
+         "description":<string>,
+         "additional_resources":list<string>,
+         "image_url":string
+      }, ...
 ```
