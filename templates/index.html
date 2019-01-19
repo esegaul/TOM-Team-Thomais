@@ -9,7 +9,7 @@ function sendData(params){
 	var url = 'addProblem';
 	var problem = document.getElementById("problem").value;
 	var paragraph = document.getElementById("values");
-	paragraph.textContent += problem + "\n";
+	paragraph.innerHTML += problem + "<br>";
 	var params = "problem=" + problem;
 	document.getElementById("problem").value = "";
 	if (params.length > 0){
