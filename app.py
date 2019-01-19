@@ -34,5 +34,11 @@ def addProblem():
 	# Adds the inputted problem to a file
 	return ('', 204)
 
+@app.route('/getProblems', methods=['GET'])
+def getProblems():
+	a = json.load(open(DB_FILE))
+	return jsonify(sorted(set(a), key=a.index))
+
+
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)
