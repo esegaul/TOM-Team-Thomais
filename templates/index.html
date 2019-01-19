@@ -27,6 +27,28 @@ function sendData(params){
 	}
 	return false;
 }
+
+function httpGet(theUrl)
+// The network request grabs the json containing mp3 structure
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+function update(){
+	jsonString = httpGet("getProblems");
+	// This is the actual file structure
+	obVal = JSON.parse(jsonString);
+	var paragraph = document.getElementById("values");
+	paragraph.innerHTML = "";
+	// Converting string to json so we can interact with it
+	for (var i = 0; i < obVal.length; i++) {
+    	paragraph.innerHTML += obVal[i] + "<br>";
+	}
+}
+
 </script>
 </head>
 <body>
@@ -41,6 +63,15 @@ function sendData(params){
 
 <p id="values">
 </p>
+
+<footer>
+<script>
+update();
+window.setInterval(function(){
+  update();
+}, 2000);
+</script>
+</footer>
 
 </body>
 </html>
