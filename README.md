@@ -50,7 +50,7 @@ An instance of the game solely distributed to Thomais
 The database is a json file in the structure of:
 
 
-```json
+```javascript
 "lessons":{
    "fractions":{
       "example":list<string>,
