@@ -6,6 +6,7 @@ app = Flask(__name__, static_url_path='/static')
 
 DB_FILE = "database.json"
 HTML_TEMPLATE = "template.html"
+PARAMETERS_IN_INFO = ["problem_type", "description", "example", "additional_resources", "image_url"]
 
 if os.path.exists(DB_FILE) == False:
 	os.system("echo [] >  {}".format(DB_FILE))
@@ -38,11 +39,17 @@ def add_problem():
 	# Adds the inputted problem to a file
 	return ('', 204)
 
-@app.route('/guide/<problemType>', methods=['POST'])
+@app.route('/guide/<problemType>', methods=['GET'])
 def get_guide(problemType):
-	if os.path.exists("templates/{}.html".format(problemType)):
-		os.system("cp {} {}.html".format(HTML_TEMPLATE, problemType))
+	print os.listdir("./templates/")
+	if os.path.exists("templates/{}.html".format(problemType)) == False:
+		os.system("cp templates/{} templates/{}.html".format(HTML_TEMPLATE, problemType))
 	return render_template("{}.html".format(problemType), info=get_problem_type_info(problemType))
+
+@app.route('/getProblems', methods=['GET'])
+def getProblems():
+	a = json.load(open(DB_FILE))
+	return jsonify(sorted(set(a), key=a.index))
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=5000)
