@@ -58,11 +58,11 @@ The database is a json file in the structure of:
       "additional_resources":list<string>,
       "image_url":string
    },
-   {
-      "subtraction":{
+   "subtraction":{
          "example":list<string>,
          "description":<string>,
          "additional_resources":list<string>,
          "image_url":string
       }, ...
+}
 ```
