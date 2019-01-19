@@ -1,1 +1,1 @@
-["5x5", "5x5", "5x5", "5x5", "5x5", "txt", "test", "test", "test2", "test", "test2", "5x5", "afds", "test", "test", "test", "test", "test", "test", "test", "test", "test", "testing", "testing1"]
+{"test": {"additional_resources": null, "image_url": null, "description": null, "problem_type": "test", "example": null}, "test2": {"additional_resources": null, "image_url": null, "description": null, "problem_type": "test2", "example": null}, "test4": {"additional_resources": null, "image_url": null, "problem_type": "test4", "description": null, "example": null}}

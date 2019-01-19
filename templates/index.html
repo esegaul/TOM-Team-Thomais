@@ -7,11 +7,11 @@
 function sendData(params){
 	var http = new XMLHttpRequest();
 	var url = 'addProblem';
-	var problem = document.getElementById("problem").value;
+	var problem = document.getElementById("problem_type").value;
 	var paragraph = document.getElementById("values");
 	paragraph.innerHTML += problem + "<br>";
-	var params = "problem=" + problem;
-	document.getElementById("problem").value = "";
+	var params = "problem_type=" + problem;
+	document.getElementById("problem_type").value = "";
 	if (params.length > 0){
 		http.open('POST', url, true);
 
@@ -38,7 +38,7 @@ function httpGet(theUrl)
 }
 
 function update(){
-	jsonString = httpGet("getProblems");
+	jsonString = httpGet("getGuideNames");
 	// This is the actual file structure
 	obVal = JSON.parse(jsonString);
 	var paragraph = document.getElementById("values");
@@ -56,7 +56,7 @@ function update(){
 
 <form onsubmit="return sendData();">
   Problem:<br>
-  <input type="text" id="problem" name="problem"><br>
+  <input type="text" id="problem_type"><br>
 
   <input type="submit" value="Submit">
 </form>
