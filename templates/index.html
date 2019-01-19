@@ -2,8 +2,45 @@
 <html>
 <head>
 	<title></title>
+	<script type="text/javascript">
+
+function sendData(params){
+	var http = new XMLHttpRequest();
+	var url = 'addProblem';
+	var problem = document.getElementById("problem").value;
+	var paragraph = document.getElementById("values");
+	paragraph.textContent += problem + "\n";
+	var params = "problem=" + problem;
+	document.getElementById("problem").value = "";
+	if (params.length > 0){
+		http.open('POST', url, true);
+
+		//Send the proper header information along with the request
+		http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+		http.onreadystatechange = function() {//Call a function when the state changes.
+		    if(http.readyState == 4 && http.status == 200) {
+		        alert(http.responseText);
+		    }
+		}
+		http.send(params);
+	}
+	return false;
+}
+</script>
 </head>
 <body>
 <h1>Team Thomais</h1>
+
+<form onsubmit="return sendData();">
+  Problem:<br>
+  <input type="text" id="problem" name="problem"><br>
+
+  <input type="submit" value="Submit">
+</form>
+
+<p id="values">
+</p>
+
 </body>
 </html>
